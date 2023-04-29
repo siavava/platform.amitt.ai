@@ -20,6 +20,27 @@ $foreground: colors.color("light-foreground");
   text-size-adjust: 100%;
 }
 
+button {
+  background: none;
+  border: 1px solid colors.color("lightest-background");
+  margin: 10px;
+  height: 2em;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  outline: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  border-radius: 50%;
+
+  transition: all 0.5s ease-out;
+  
+  &:hover {
+    background: colors.color("lightest-background");
+  }
+}
+
 body, html {
   font-family: 'SF Pro Text', sans-serif;;
   font-weight: 400;
