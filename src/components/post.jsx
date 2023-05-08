@@ -12,7 +12,7 @@ export default function Post() {
         <div key={post.id} className="post">
           <img className="post-cover" src={post.coverUrl} alt={post.title} />
           <h2 className="post-title">{post.title}</h2>
-          {/* <p className="post-content">{post?.content}</p> */}
+          { post.content && <p className="post-content">{post?.content}</p> }
           <ul className="post-tags">
             {post.tags?.split(',').map((tag) => (
               <li key={tag} className="post-tag">{tag}</li>
