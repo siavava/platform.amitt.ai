@@ -205,7 +205,7 @@ body, html {
 }
 
 .posts {
-  width: 100%;
+  width: min(100%, 1080px);
   background: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

@@ -1,48 +1,41 @@
-# CS52 SA2: Vite My Mouse!
+# CS52 Lab 4: Redux Platform Frontend
 
-[deployed url](https://vite-my-mouse.onrender.com/)
-
-## Env Description
-
-I set up a project (from scratch)
-and configured Vite to bundle the project.
-I then configured ESLint to detect linting errors and automatically
-fix them on save, as well as Sass for website styling.
-Overall, everything went smoothly.
-
-> **Note**
-> 
-> I set up my repositories in a folder (call it `workspace`).
-> My vite project initially wouldn't run, and I discovered
-> it was because the repository's parent directory had an empty
-> `package.json` file.
-> Is this always an issue, and if so &mdash;
-> is there ever a way to tell `vite` not to look beyond the current directory
-> (going "up" the directory structure)?
->
-> I can see a scenario where we do _not_ want the parent's configurations,
-> if any, interfering with our configurations.
+[deployed url](https://notes-frontend-siavava.onrender.com/)
 
 ## What Worked Well
 
-Vite! :zap:
+Redux works well, although I still find it a bit of an anti-pattern
+compared to other stuff out there (have worked with [Pinia](https://pinia.esm.dev/)
+and it's much nicer).
 
 ## What Didn't
 
-Nothing
+My edit screen does not seem to initialize properly when accessed directly
+(i.e. when you go to `:postID/edit` directly as opposed to going to
+`:postID` then clicking the **EDIT** button). 
+
+I couldn't figure out how to fix this issue, so I added a back-routing switch that sends
+the browser to the non-editing page if the edit page is accessed directly.
 
 ## Extra Credit
 
-I tried to deploy to Heroku but it wanted permission
-to _all_ repositories in the organization.
-I don't think that's a good idea.
+Don't know if it counts, but I tried to make the site look nice and added animations,
+hover states, etc.
 
 ## Screenshots
 
-### Base 
+### Landing Page (Posts) 
 
-![vite site](assets/vite-image.png)
+![landing](assets/landing.png)
 
-### Slightly nicer visual design
+### Post Page
 
-![nicer-design](assets/nicer-design.png)
+![post view](assets/post.png)
+
+### Edit Page
+
+![edit post](assets/edit-post.png)
+
+### New Post Page
+
+![new post](assets/new-post.png)
