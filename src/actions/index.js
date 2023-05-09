@@ -1,6 +1,5 @@
 // import axios
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 
 const ROOT_URL = 'https://platform.cs52.me/api';
 const API_KEY = '?key=amittai_siavava';
@@ -24,8 +23,8 @@ export function fetchPosts() {
         type: ActionTypes.FETCH_POSTS,
         payload: response.data,
       });
-      const posts = useSelector((state) => state.posts);
-      console.log(`\n\n ${posts}\n\n`);
+      // const posts = useSelector((state) => state.posts);
+      // console.log(`\n\n ${posts}\n\n`);
     }).catch((error) => {
       return () => console.error(`Error fetching posts: ${error}`);
     });
@@ -36,10 +35,8 @@ export function createPost(post, navigate) {
   // create a post using axios
   return (dispatch) => {
     axios.post(`${ROOT_URL}/posts${API_KEY}`, post).then((response) => {
-      dispatch({
-        type: ActionTypes.FETCH_POST,
-        payload: response.data,
-      });
+      console.log(`\n\n ${response.data}\n\n`);
+      fetchPosts()(dispatch);
       navigate(`/posts/${response.data.id}`);
     }).catch((error) => {
       return () => console.error(`Error creating post: ${error}`);
@@ -47,14 +44,17 @@ export function createPost(post, navigate) {
   };
 }
 
-export function updatePost(post) {
+export function updatePost(post, navigate) {
   // update a post using axios
   return (dispatch) => {
     axios.put(`${ROOT_URL}/posts/${post.id}${API_KEY}`, post).then((response) => {
-      dispatch({
-        type: ActionTypes.UPDATE_POST,
-        payload: response.data,
-      });
+      fetchPosts()(dispatch);
+      navigate(`/posts/${post.id}`);
+      // console.log(`response: ${response.data}`);
+      // dispatch({
+      //   type: ActionTypes.UPDATE_POST,
+      //   payload: response.data,
+      // });
     }).catch((error) => {
       return () => console.error(`Error updating post: ${error}`);
     });
@@ -64,13 +64,13 @@ export function updatePost(post) {
 export function fetchPost(id) {
   // fetch a single post using
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts${API_KEY}/`).then((response) => {
+    axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {
       dispatch({
         type: ActionTypes.FETCH_POST,
         payload: response.data,
       });
-      const posts = useSelector((state) => state.posts);
-      console.log(`\n\n ${posts}\n\n`);
+      // const posts = useSelector((state) => state.posts);
+      // console.log(`\n\n ${posts}\n\n`);
     }).catch((error) => {
       return () => console.error(`Error fetching posts: ${error}`);
     });
@@ -80,10 +80,7 @@ export function fetchPost(id) {
 export function deletePost(id, navigate) {
   return (dispatch) => {
     axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {
-      dispatch({
-        type: ActionTypes.DELETE_POST,
-        payload: response.data,
-      });
+      fetchPosts()(dispatch);
       navigate('/');
     }).catch((error) => {
       return () => console.error(`Error deleting post: ${error}`);

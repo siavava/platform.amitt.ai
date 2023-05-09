@@ -1,21 +1,29 @@
+import { produce } from 'immer';
 import { ActionTypes } from '../actions';
 
-// import dispatch
+const initialState = {
+  posts: [],
+  currentPost: null,
+};
 
-export default function PostReducer(state = null, action = {}) {
+const PostReducer = produce((draftState, action = {}) => {
   switch (action.type) {
     // fetch posts action
-    case ActionTypes.FETCH_POSTS: {
-      // only update if payload is not null.
-      console.log(`reducing... ${action.payload}`);
-      return action.payload ? action.payload : state;
-    }
+    case ActionTypes.FETCH_POSTS:
+      // eslint-disable-next-line no-param-reassign
+      draftState.posts = action.payload;
+      console.log('posts', draftState.posts);
+      break;
 
-    // update posts action
     case ActionTypes.FETCH_POST:
-      // only update if payload is not null.
-      return action.payload ? action.payload : state;
+      // eslint-disable-next-line no-param-reassign
+      draftState.currentPost = action.payload;
+      console.log('currentPost', draftState.currentPost);
+      break;
+
     default:
-      return state;
+      break;
   }
-}
+}, initialState);
+
+export default PostReducer;

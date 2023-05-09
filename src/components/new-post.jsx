@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createPost } from '../actions';
 
 export default function NewPost() {
-  const [title, setTitle] = React.useState('');
-  const [content, setContent] = React.useState('');
-  const [tags, setTags] = React.useState([]);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [tagsArray, setTags] = useState([]);
+  const [coverUrl, setCoverUrl] = useState('https://picsum.photos/200/300');
 
   const changeTitle = (event) => {
     setTitle(event.target.value);
@@ -14,7 +18,42 @@ export default function NewPost() {
   };
 
   const changeTags = (event) => {
-    setTags(event.target.value.split(' '));
+    // change text to lower case and remove special characters
+    const text = event.target.value.toLowerCase().replace(/[^a-z0-9 ]/g, '');
+    setTags(text.split(' '));
+  };
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const submit = (event) => {
+    event.preventDefault();
+    if (!title || !content) {
+      console.log('Please provide title and content!');
+      return;
+    }
+    // call redux action to create a new post
+
+    // generate random 32-char id
+    const id = Math.random().toString(36).substr(2, 32);
+    console.log(`id: ${id}`);
+    const post = {
+      id,
+      title,
+      content,
+      coverUrl,
+      tags: tagsArray.join(','),
+    };
+
+    createPost(post, navigate)(dispatch);
+  };
+
+  const changeCoverUrl = (event) => {
+    setCoverUrl(event.target.value);
+  };
+
+  const cancel = (event) => {
+    event.preventDefault();
+    navigate('/');
   };
 
   return (
@@ -39,8 +78,8 @@ export default function NewPost() {
         onInput={changeContent}
       />
       <ul className="current-tags">
-        {Array.from(new Set(tags)).map((tag) => (
-          tag && <li key={tag} className="current-tag">{`#${tag}`}</li>
+        {Array.from(new Set(tagsArray)).map((tag) => (
+          tag && <li key={tag} className="current-tag">{tag}</li>
         ))}
       </ul>
       <input
@@ -49,11 +88,26 @@ export default function NewPost() {
         placeholder="tags (space-separated)"
         id="tags"
         name="tags"
-        value={tags.join(' ')}
+        value={tagsArray.join(' ')}
         onInput={changeTags}
       />
-      <button type="submit">Submit</button>
-      {/* </form> */}
+      <input
+        type="text"
+        className="tags-input"
+        placeholder="cover url"
+        id="cover-url"
+        name="cover-url"
+        value={coverUrl}
+        onInput={changeCoverUrl}
+      />
+      <div className="post-buttons">
+        <button className="app-button" type="submit" onClick={submit}>
+          <img className="app-svg" src="/images/add-note.svg" alt="add" />
+        </button>
+        <button className="app-button" type="submit" onClick={cancel}>
+          <img className="app-svg" src="/images/cancel-add-note.svg" alt="add" />
+        </button>
+      </div>
     </div>
   );
 }

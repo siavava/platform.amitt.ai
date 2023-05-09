@@ -8,11 +8,13 @@
 import React, { useEffect } from 'react';
 import {
   BrowserRouter, Routes, Route, NavLink,
+  useNavigate,
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Post from './post';
 import Posts from './posts';
 import NewPost from './new-post';
+import EditPost from './edit-post';
 import { fetchPosts } from '../actions';
 
 export default function App() {
@@ -33,6 +35,7 @@ export default function App() {
           <Route path="/" element={<Posts />} />
           <Route path="/posts/new" element={<NewPost />} />
           <Route path="/posts/:postID" element={<Post />} />
+          <Route path="/posts/:postID/edit" element={<EditPost />} />
           <Route path="*" element={<div> post not found </div>} />
         </Routes>
       </div>
@@ -40,28 +43,39 @@ export default function App() {
   );
 }
 
-// function About(props) {
-//   return <div className="route-text"> All there is to know about me </div>;
-// }
-
-// function Welcome(props) {
-//   return (
-//     <>
-//       <div className="route-text"> Welcome to my site. </div>
-//       <Counter />
-//       <Controls />
-//     </>
-//   );
-// }
-
 function Nav(props) {
-  const posts = useSelector((state) => state.posts);
+  const navigate = useNavigate();
+  const loadNav = () => {
+    const navLinks = document.getElementById('nav-links');
+    navLinks.classList.toggle('hidden');
+  };
+
+  const loadNewPostPage = () => {
+    navigate('/posts/new');
+  };
+
+  const loadHomePage = () => {
+    navigate('/');
+  };
+  const posts = useSelector((state) => state.posts.posts);
+  console.log(`posts: ${posts[0]}`);
   return (
     <nav className="nav">
-      <ul className="nav-links">
+      <button className="logo-button" type="submit" onClick={loadHomePage}>
+        <img className="app-svg" src="/images/logo.svg" alt="add" />
+      </button>
+      <div className="post-buttons">
+        <button className="app-button" type="submit" onClick={loadNewPostPage}>
+          <img className="app-svg" src="/images/add-note.svg" alt="add" />
+        </button>
+        <button className="app-button" type="submit" onClick={loadNav}>
+          <img className="app-svg" src="/images/menu.svg" alt="add" />
+        </button>
+      </div>
+      <ul id="nav-links" className="nav-links hidden">
         <li><NavLink className="nav-link" to="/"> all </NavLink></li>
         <li><NavLink className="nav-link" to="/posts/new">new post </NavLink></li>
-        {posts?.map((post) => (
+        {posts.length && posts.map((post) => (
           <li key={post.id}>
             <NavLink className="nav-link" to={`/posts/${post.id}`}>{post.title}</NavLink>
           </li>
