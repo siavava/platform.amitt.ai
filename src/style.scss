@@ -1,20 +1,10 @@
 @use "colors";
 
-/* import fonts */
-// @import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-// html {
-//   cursor: none;
-// }
-
-$background: colors.color("background");
-$foreground: colors.color("light-foreground");
 
 :root {
   text-size-adjust: 100%;
@@ -28,8 +18,8 @@ body, html {
   font-family: 'SF Pro Text', sans-serif;;
   font-weight: 400;
   font-size: clamp(12px, 3vw, 40px);
-  background: $background;
-  color: $foreground;
+  background: colors.color("background");
+  color: colors.color("light-foreground");
   height: 100%;
   width: 100%;
   display: flex;
@@ -43,16 +33,6 @@ body, html {
   overflow: hidden;
   position: relative;
 }
-
-$colors: (
-  "teal": #00ffd9,
-  "purple": #a374ff,
-  "khaki": #ffd074,ter
-  "white": #ecf7fa,
-  "black": #050505,
-  "ochre": #ff4e20,
-  "pastel": #fdfd96,
-);
 
 .blur {
   position: fixed;
@@ -71,14 +51,6 @@ $colors: (
   width: min(500px, 50vw);
   aspect-ratio: 1/1;
   background: colors.color("primary-highlight");
-  // background: linear-gradient(
-  //   to right,
-  //   dodgerblue,
-  //   colors.color("ochre"),
-  //   #ffd074,
-  //   magenta,
-  //   colors.color("primary-highlight"),
-  // );
   border-radius: 50%;
   z-index: 1;
   pointer-events: none;
@@ -118,15 +90,13 @@ $colors: (
   & > * {
     width: min(100%, 1080px);
     margin: 30px auto;
-    // margin: auto;
 
     &:not(.posts, .nav) {
       margin: auto;
     }
-
-
   }
 }
+
 .nav {
   margin: 20px auto 30px auto;
   border-radius: 10px;
@@ -134,7 +104,6 @@ $colors: (
   padding: 20px;
   height: 70px;
   width: 100%;
-  border: 1px solid rgba(colors.color("secondary-highlight"), 0.2);
   position: sticky;
   z-index: 4;
 
@@ -229,7 +198,6 @@ $colors: (
 
 .route-text {
   color: colors.color("lightest-foreground");
-  // font-family: 'SF Mono', monospace;
   font-weight: 600;
   font-size: clamp(10px, 0.7rem, 20px);
   text-align: center;
@@ -240,13 +208,11 @@ $colors: (
   width: 100%;
   background: none;
   display: grid;
-  // background: red;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
 }
 
-.post {
-  // z-index: 3;
+.post { 
   border: 1px solid colors.color("lightest-background");
   border-radius: 20px;
   padding: 20px clamp(20px, 15%, 150px);
@@ -263,7 +229,7 @@ $colors: (
   }
 
   .post-title {
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 600;
     color: colors.color("primary-highlight");
     margin-bottom: 10px;
@@ -327,7 +293,6 @@ $colors: (
 }
 
 .new-post {
-  // width: clamp(300px, 50vw, 500px);
   margin: auto;
   vertical-align: middle;
   justify-self: center;
@@ -336,7 +301,6 @@ $colors: (
 
   display: flex;
   flex-direction: column;
-  // gap: 40px;
   border: 1px solid colors.color("lightest-background");
   padding: 40px;
   border-radius: 10px;
@@ -416,10 +380,12 @@ $colors: (
   gap: 10px;
   margin-bottom: 10px;
   width: 100%;
+  margin-top: 20px;
+  margin-bottom: 30px;
 
 
   .current-tag {
-    background: rgba(colors.color("primary-highlight"), 0.4);
+    background: rgba(colors.color("primary-highlight"), 0.3);
     padding: 5px 10px;
     border-radius: 10px;
     font-size: clamp(10px, 0.7rem, 15px);
@@ -443,14 +409,12 @@ $colors: (
 .app-button {
   width: fit-content;
   border: none;
-  // border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   overflow: hidden;
-  // z-index: 10;
-  background: colors.color("primary-highlight");
+  background: rgba(colors.color("primary-highlight"), 0.5);
   pointer-events: all;
 
   &:hover {
@@ -466,9 +430,8 @@ $colors: (
   align-items: center;
   border-radius: 50%;
   overflow: hidden;
-  // background: yellow;
+  background: rgba(colors.color("primary-highlight"), 0.5);
   pointer-events: all;
-  color: red;
 
   &:hover {
     cursor: pointer;

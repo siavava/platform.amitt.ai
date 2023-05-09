@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router';
 export default function Posts() {
   // get posts from redux store
   const posts = useSelector((state) => state.posts.posts);
-  console.log(`posts: ${typeof posts}`);
   const navigate = useNavigate();
 
   const navigateToPost = (postID) => {
@@ -24,9 +23,8 @@ export default function Posts() {
         >
           <img className="post-cover" src={post.coverUrl} alt={post.title} />
           <h2 className="post-title">{post.title}</h2>
-          {/* <p className="post-content">{post?.content}</p> */}
           <ul className="current-tags">
-            {post.tags?.split(',').map((tag) => (
+            {Array.from(new Set(post.tags?.split(','))).sort().map((tag) => (
               <li key={tag} className="current-tag">{tag}</li>
             ))}
           </ul>

@@ -5,6 +5,7 @@
  * It also contains the code to follow the mouse.
  *
  */
+
 import React, { useEffect } from 'react';
 import {
   BrowserRouter, Routes, Route, NavLink,
@@ -27,9 +28,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="app-container">
-
-        { /* top nav-bar */ }
-
         <Nav />
         <Routes>
           <Route path="/" element={<Posts />} />
@@ -58,7 +56,6 @@ function Nav(props) {
     navigate('/');
   };
   const posts = useSelector((state) => state.posts.posts);
-  console.log(`posts: ${posts[0]}`);
   return (
     <nav className="nav">
       <button className="logo-button" type="submit" onClick={loadHomePage}>
@@ -84,11 +81,6 @@ function Nav(props) {
     </nav>
   );
 }
-
-// function Test(props) {
-//   const { id } = useParams();
-//   return <div className="route-text"> This is a test route with ID {id} </div>;
-// }
 
 // code to follow mouse... from ported from the starter.
 const tracker = document.getElementById('tracker');

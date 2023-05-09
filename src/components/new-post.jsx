@@ -28,14 +28,12 @@ export default function NewPost() {
   const submit = (event) => {
     event.preventDefault();
     if (!title || !content) {
-      console.log('Please provide title and content!');
       return;
     }
     // call redux action to create a new post
 
     // generate random 32-char id
     const id = Math.random().toString(36).substr(2, 32);
-    console.log(`id: ${id}`);
     const post = {
       id,
       title,
@@ -78,7 +76,7 @@ export default function NewPost() {
         onInput={changeContent}
       />
       <ul className="current-tags">
-        {Array.from(new Set(tagsArray)).map((tag) => (
+        {Array.from(new Set(tagsArray)).sort().map((tag) => (
           tag && <li key={tag} className="current-tag">{tag}</li>
         ))}
       </ul>

@@ -23,23 +23,27 @@ export function fetchPosts() {
         type: ActionTypes.FETCH_POSTS,
         payload: response.data,
       });
-      // const posts = useSelector((state) => state.posts);
-      // console.log(`\n\n ${posts}\n\n`);
     }).catch((error) => {
       return () => console.error(`Error fetching posts: ${error}`);
     });
   };
 }
 
+/**
+ *
+ * @param {any} post the post to create
+ * @param {any} navigate the navigate function
+ * @returns nothing
+ */
 export function createPost(post, navigate) {
   // create a post using axios
   return (dispatch) => {
     axios.post(`${ROOT_URL}/posts${API_KEY}`, post).then((response) => {
-      console.log(`\n\n ${response.data}\n\n`);
       fetchPosts()(dispatch);
       navigate(`/posts/${response.data.id}`);
     }).catch((error) => {
-      return () => console.error(`Error creating post: ${error}`);
+      console.error(`Error creating post: ${error}`);
+      navigate('/');
     });
   };
 }
@@ -50,11 +54,6 @@ export function updatePost(post, navigate) {
     axios.put(`${ROOT_URL}/posts/${post.id}${API_KEY}`, post).then((response) => {
       fetchPosts()(dispatch);
       navigate(`/posts/${post.id}`);
-      // console.log(`response: ${response.data}`);
-      // dispatch({
-      //   type: ActionTypes.UPDATE_POST,
-      //   payload: response.data,
-      // });
     }).catch((error) => {
       return () => console.error(`Error updating post: ${error}`);
     });
@@ -69,8 +68,6 @@ export function fetchPost(id) {
         type: ActionTypes.FETCH_POST,
         payload: response.data,
       });
-      // const posts = useSelector((state) => state.posts);
-      // console.log(`\n\n ${posts}\n\n`);
     }).catch((error) => {
       return () => console.error(`Error fetching posts: ${error}`);
     });

@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import { fetchPost, deletePost } from '../actions';
 
-// import react markdown
-
 export default function Post() {
   const { postID } = useParams();
   const dispatch = useDispatch();
@@ -35,7 +33,7 @@ export default function Post() {
           <h2 className="post-title">{post?.title}</h2>
           <ReactMarkdown className="post-content">{post?.content}</ReactMarkdown>
           <ul className="current-tags">
-            {post?.tags?.split(',').map((tag) => (
+            {Array.from(new Set(post?.tags.split(','))).sort().map((tag) => (
               <li key={tag} className="current-tag">{tag}</li>
             ))}
           </ul>

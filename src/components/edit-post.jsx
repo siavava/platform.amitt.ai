@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector, connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { reduxForm } from 'redux-form';
 import { updatePost, fetchPost } from '../actions';
 
 export default function EditPost() {
@@ -19,7 +18,6 @@ export default function EditPost() {
     tags: '',
     coverUrl: '',
   };
-  console.log(`post: ${post.title}`);
 
   const [title, setTitle] = useState(post.title);
   const [content, setContent] = useState(post.content);
@@ -48,10 +46,8 @@ export default function EditPost() {
   const submit = (event) => {
     event.preventDefault();
     if (!title || !content) {
-      console.log('Please provide title and content!');
       return;
     }
-    console.log(`id: ${postID}`);
     const newPost = {
       id: postID,
       title,
@@ -73,7 +69,6 @@ export default function EditPost() {
       : (
         <div className="new-post">
           <h1 className="new-post-page-title">Editing post {postID}</h1>
-          {/* <form> */}
           <input
             className="title-input"
             placeholder="Title"
@@ -92,7 +87,7 @@ export default function EditPost() {
             onInput={changeContent}
           />
           <ul className="current-tags">
-            {Array.from(new Set(tagsArray)).map((tag) => (
+            {Array.from(new Set(tagsArray)).sort().map((tag) => (
               tag && <li key={tag} className="current-tag">{tag}</li>
             ))}
           </ul>
