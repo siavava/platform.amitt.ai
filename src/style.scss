@@ -91,7 +91,7 @@ body, html {
     width: min(100%, 1080px);
     margin: 30px auto;
 
-    &:not(.posts, .nav) {
+    &:not(.posts, .nav, .search-bar) {
       margin: auto;
     }
   }
@@ -255,7 +255,7 @@ body, html {
 
     :is(h1, h2, h3) {
       color: colors.color("lightest-foreground");
-      margin-bottom: 10px;
+      margin: 10px 0;
       text-transform: capitalize;
     }
 
@@ -288,6 +288,30 @@ body, html {
       list-style: disc;
       margin-left: 20px;
     } 
+
+    a {
+      color: colors.color("primary-highlight");
+      text-decoration: none;
+      pointer-events: all;
+      position: relative;
+      overflow: hidden;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 1px;
+        background: colors.color("primary-highlight");
+        transition: all 0.5s ease-out;
+        pointer-events: none;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
 
   }
 }
@@ -441,6 +465,42 @@ body, html {
 .app-svg {
   height: 30px;
   aspect-ratio: 1/1;
+}
+
+.search-bar {
+  width: min(100%, 1080px);
+  color: inherit;
+
+  .search-bar-input {
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border: none;
+    color: colors.color("lightest-foreground");
+    line-height: 3;
+    border-bottom: 1px solid colors.color("lightest-background");
+    transition: all 0.5s ease-in-out;
+
+    &::placeholder {
+      color: colors.color("dark-foreground");
+      transition: all 0.5s ease-in-out;
+    }
+
+    // remove highlight on focus
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      // border-bottom: 1px solid colors.color("primary-highlight");
+
+      border-bottom: 1px solid colors.color("dark-foreground");
+
+      &::placeholder {
+        color: colors.color("light-foreground");
+      }
+    }
+  }
 }
 
 

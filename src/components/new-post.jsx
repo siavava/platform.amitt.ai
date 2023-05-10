@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import TextareaAutosize from 'react-textarea-autosize';
 import { createPost } from '../actions';
 
 export default function NewPost() {
@@ -67,7 +68,7 @@ export default function NewPost() {
         value={title}
         onInput={changeTitle}
       />
-      <textarea
+      <TextareaAutosize
         className="content-input"
         placeholder="content"
         id="content"

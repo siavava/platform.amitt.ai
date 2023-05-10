@@ -19,8 +19,10 @@ the browser to the non-editing page if the edit page is accessed directly.
 
 ## Extra Credit
 
-Don't know if it counts, but I tried to make the site look nice and added animations,
+1. Don't know if it counts, but I tried to make the site look nice and added animations,
 hover states, etc.
+
+2. I added a search filter function that filters posts by tags.
 
 ## Screenshots
 
