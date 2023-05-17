@@ -1,7 +1,7 @@
 // import axios
 import axios from 'axios';
 
-const ROOT_URL = 'https://platform.cs52.me/api';
+const ROOT_URL = 'https://notes-api-siavava.onrender.com/api';
 const API_KEY = '?key=amittai_siavava';
 
 export const ActionTypes = {
