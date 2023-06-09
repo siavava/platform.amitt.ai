@@ -1,6 +1,8 @@
 # Redux Platform Frontend
 
-[`platform.amitt.ai`](https://platform.amitt.ai/)
+Deployed FrontEnd: [`platform.amitt.ai`](https://platform.amitt.ai)
+
+Deployed API: [`platform-api.amitt.ai`](https://platform-api.amitt.ai)
 
 ## What Worked Well
 
