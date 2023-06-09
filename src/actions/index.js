@@ -1,7 +1,7 @@
 // import axios
 import axios from 'axios';
 
-const ROOT_URL = 'https://notes-api-siavava.onrender.com/api';
+const ROOT_URL = 'https://platform-api.amitt.ai/api';
 const API_KEY = '?key=amittai_siavava';
 
 export const ActionTypes = {
