@@ -50,7 +50,7 @@ body, html {
   left: calc(50% - 200px);
   width: min(500px, 50vw);
   aspect-ratio: 1/1;
-  background: colors.color("primary-highlight");
+  background: colors.color("foreground");
   border-radius: 50%;
   z-index: 1;
   pointer-events: none;
